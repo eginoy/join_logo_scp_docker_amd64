@@ -1,0 +1,13 @@
+version: '3'
+services:
+    cmcut:
+      container_name: cmcut
+      build: .
+      devices:
+       - /dev/dri/renderD128
+      volumes:
+        - /home/eginoy/public/recorded:/ts
+        - /home/eginoy/public/encoded:/mp4
+        - ./logo:/root/JoinLogoScpTrialSetLinux/modules/join_logo_scp_trial/logo
+      tty: true
+      restart: unless-stopped
