@@ -114,8 +114,8 @@ RUN cd FFmpeg && \
 #l-smash-works && chapter_exe
 FROM avisynth as l-smash-works
 WORKDIR /root
-RUN git clone https://github.com/tobitti0/chapter_exe.git
-COPY ./dependence /root
+RUN git clone https://github.com/tobitti0/chapter_exe.git && \
+    git clone https://github.com/HolyWu/L-SMASH-Works.git
 COPY --from=l-smash /usr /usr
 RUN cd L-SMASH-Works/AviSynth && \
     CC=gcc CXX=gcc LD=gcc LDFLAGS="-Wl,-Bsymbolic,-L/opt/vc/lib" meson build && cd build && ninja -v && ninja install
