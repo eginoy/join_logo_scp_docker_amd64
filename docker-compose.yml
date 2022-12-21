@@ -4,7 +4,7 @@ services:
       container_name: cmcut
       build: .
       devices:
-       - /dev/dri/renderD128
+       - '/dev/dri/:/dev/dri/'
       volumes:
         - ${INPUT_DIR_PATH}:/ts
         - ${OUTPUT_DIR_PATH}:/mp4
