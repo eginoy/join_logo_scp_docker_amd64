@@ -69,7 +69,7 @@ RUN git clone https://github.com/mstorsjo/fdk-aac.git && \
     cd fdk-aac && \
     ./autogen.sh && \
     ./configure && \
-    make -j$MAKE_JOB_CNT && \
+    make -j$(nproc) && \
     make install && \
     /sbin/ldconfig
 
@@ -79,7 +79,7 @@ WORKDIR /root
 RUN git clone https://github.com/l-smash/l-smash.git && \
     cd l-smash && \
     ./configure --enable-shared && \
-    make -j$MAKE_JOB_CNT && \
+    make -j$(nproc) && \
     make install && \
     ldconfig
 
@@ -123,7 +123,7 @@ RUN cd FFmpeg && \
     --enable-libmfx \ 
     --extra-libs=-ldl \
     --disable-x86asm \
-    && make -j$MAKE_JOB_CNT \
+    && make -j$(nproc) \
     && make install
 
 #l-smash-works && chapter_exe
@@ -141,13 +141,13 @@ RUN git clone --recursive https://github.com/tobitti0/JoinLogoScpTrialSetLinux.g
 COPY --from=l-smash-works /root /root
 #join_logo_scp
 RUN cd JoinLogoScpTrialSetLinux/modules/logoframe/src && \
-    make -j$MAKE_JOB_CNT && \
+    make -j$(nproc) && \
     cd && cp JoinLogoScpTrialSetLinux/modules/logoframe/src/logoframe JoinLogoScpTrialSetLinux/modules/join_logo_scp_trial/bin/logoframe && \
     cd JoinLogoScpTrialSetLinux/modules/join_logo_scp/src && \
-    make -j$MAKE_JOB_CNT && \
+    make -j$(nproc) && \
     cd && cp JoinLogoScpTrialSetLinux/modules/join_logo_scp/src/join_logo_scp JoinLogoScpTrialSetLinux/modules/join_logo_scp_trial/bin/join_logo_scp && \
     cd /root/chapter_exe/src && \
-    make -j$MAKE_JOB_CNT && \
+    make -j$(nproc) && \
     cd && cp chapter_exe/src/chapter_exe JoinLogoScpTrialSetLinux/modules/join_logo_scp_trial/bin/chapter_exe && \
     cd JoinLogoScpTrialSetLinux/modules/join_logo_scp_trial && \
     npm i
@@ -157,7 +157,7 @@ WORKDIR /root
 #delogo
 RUN git clone https://github.com/tobitti0/delogo-AviSynthPlus-Linux.git && \
     cd delogo-AviSynthPlus-Linux/src && \
-    make -j$MAKE_JOB_CNT && make install
+    make -j$(nproc) && make install
 
 FROM ubuntu:jammy as cmcut
 #日本語対応
