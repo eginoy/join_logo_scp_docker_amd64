@@ -100,28 +100,28 @@ COPY --from=fdk-aac /usr /usr
 RUN cd FFmpeg && \
     #https://www.willusher.io/general/2020/11/15/hw-accel-encoding-rpi4
     ./configure \
-    # --extra-ldflags="-latomic" \ 
-    # --extra-cflags="-I/usr/local/include" \ 
-    # --extra-ldflags="-L/usr/local/lib" \ 
-    # --target-os=linux \ 
-    # --enable-gpl \ 
-    # --disable-doc \ 
-    # --disable-debug \ 
-    # --enable-pic \ 
-    # --enable-avisynth \ 
-    # --enable-libx264 \ 
-    # --enable-libx265 \ 
-    # --enable-libfdk-aac \ 
-    # --enable-libfreetype \ 
-    # --enable-libmp3lame \ 
-    # --enable-libopus \ 
-    # --enable-libvorbis \ 
-    # --enable-libvpx \ 
-    # --enable-nonfree \ 
-    # --enable-vaapi \
-    # #qsv: libmfx
-    # --enable-libmfx \ 
-    # --extra-libs=-ldl \
+    --extra-ldflags="-latomic" \ 
+    --extra-cflags="-I/usr/local/include" \ 
+    --extra-ldflags="-L/usr/local/lib" \ 
+    --target-os=linux \ 
+    --enable-gpl \ 
+    --disable-doc \ 
+    --disable-debug \ 
+    --enable-pic \ 
+    --enable-avisynth \ 
+    --enable-libx264 \ 
+    --enable-libx265 \ 
+    --enable-libfdk-aac \ 
+    --enable-libfreetype \ 
+    --enable-libmp3lame \ 
+    --enable-libopus \ 
+    --enable-libvorbis \ 
+    --enable-libvpx \ 
+    --enable-nonfree \ 
+    --enable-vaapi \
+    #qsv: libmfx
+    --enable-libmfx \ 
+    --extra-libs=-ldl \
     --disable-x86asm \
     && make -j$MAKE_JOB_CNT \
     && make install
